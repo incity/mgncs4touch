@@ -64,27 +64,27 @@ AC_PROG_MAKE_SET
 
 AM_INIT_AUTOMAKE
 
-AC_HEADER_DIRENT
-AC_HEADER_STDC
-AC_HEADER_SYS_WAIT
-AC_CHECK_HEADERS([fcntl.h stdlib.h string.h sys/ioctl.h sys/time.h termio.h termios.h unistd.h])
+#AC_HEADER_DIRENT
+#AC_HEADER_STDC
+#AC_HEADER_SYS_WAIT
+#AC_CHECK_HEADERS([fcntl.h stdlib.h string.h sys/ioctl.h sys/time.h termio.h termios.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_HEADER_STDBOOL
-AC_C_CONST
-AC_C_INLINE
-AC_TYPE_PID_T
-AC_STRUCT_TM
+#AC_HEADER_STDBOOL
+#AC_C_CONST
+#AC_C_INLINE
+#AC_TYPE_PID_T
+#AC_STRUCT_TM
 
 # Checks for library functions.
-AC_FUNC_CLOSEDIR_VOID
-AC_FUNC_FORK
-AC_PROG_GCC_TRADITIONAL
-AC_FUNC_MALLOC
-AC_FUNC_STAT
-AC_FUNC_VPRINTF
-AC_FUNC_ALLOCA
-AC_CHECK_FUNCS([bzero dup2 getcwd memmove memset putenv strchr strdup strerror strstr])
+#AC_FUNC_CLOSEDIR_VOID
+#AC_FUNC_FORK
+#AC_PROG_GCC_TRADITIONAL
+#AC_FUNC_MALLOC
+#AC_FUNC_STAT
+#AC_FUNC_VPRINTF
+#AC_FUNC_ALLOCA
+#AC_CHECK_FUNCS([bzero dup2 getcwd memmove memset putenv strchr strdup strerror strstr])
 
 AC_CONFIG_HEADER(mgncs4touchconfig.h)
 
