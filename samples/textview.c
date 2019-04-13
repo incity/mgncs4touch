@@ -58,7 +58,7 @@
 #define ID_HTEXTVIEW    102
 #define ID_TOGGLE 103
 
-char *newtext = "##################1###################################1###################################1###################################1###################################1#################";
+char *newtext = "##################1#################";
 
 static void toggle_notify(mWidget *self, int id, int nc, DWORD add_data)
 {
@@ -84,7 +84,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
 	{
 		NCSCTRL_TEXTVIEW, 
 		ID_TEXTVIEW,
-		120, 40, 500, 150,
+		120, 220, 100, 50,
 		WS_VISIBLE,
 		WS_EX_TRANSPARENT,
 		"012345678909876543210\n-=qwertyuiop\n[]asdfghjkl\n;'zxcvbnm\n,./~!@#$%^\n&*()_+",
@@ -98,7 +98,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
     {
         NCSCTRL_TEXTVIEW, 
         ID_HTEXTVIEW,
-        120, 320, 500, 150,
+        120, 80, 200, 50,
         WS_VISIBLE | NCSS_TEXTVIEW_VERTICAL,
         WS_EX_TRANSPARENT,
         "012345678909876543210-=qwertyuiop[]asdfghjkl\n;'zxcvbnm\n,./~!@#$%^\n&*()_+",
@@ -137,7 +137,7 @@ static NCS_EVENT_HANDLER mymain_handlers[] = {
 static NCS_MNWND_TEMPLATE mymain_templ = {
     NCSCTRL_MAINWND, 
     1,
-    0, 0, 800, 480,
+    0, 0, 480, 480,
     WS_CAPTION | WS_BORDER | WS_VISIBLE,
     WS_EX_AUTOSECONDARYDC,
     "TextView",

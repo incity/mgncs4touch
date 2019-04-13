@@ -47,8 +47,7 @@ struct _mButtonPanelPiece
     void (*clearGradientBackgroundColor)(clss*, BOOL, BOOL);     \
     void (*setStates)(clss*); \
     void (*useStateChange)(clss*, BOOL); \
-    void (*setGradientBorderColor)(clss*,    \
-            ARGB*, float*, unsigned int);
+    void (*setGradientBorderColor)(clss*, ARGB*, float*, unsigned int);
 
 struct _mButtonPanelPieceClass
 {

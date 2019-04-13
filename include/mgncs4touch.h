@@ -47,10 +47,13 @@
 #include "manimation.h"
 
 #include "mpieceitem.h"
+#include "mpiecegriditem.h"
 #include "mitemiterator.h"
 #include "mlayout_manager.h"
 #include "mcenterhbox.h"
 #include "mlinevbox.h"
+#include "mflowlayout.h"
+#include "mgridlayout.h"
 #include "mfillboxex.h"
 
 #include "pieces/mnsdrawpiece.h"
@@ -94,6 +97,9 @@
 #include "physics-animation/physics-animation.h"
 
 #include "mswitchbutton.h"
+#include "mtoggle.h"
+#include "mpasswordbox.h"
+#include "mtextview.h"
 #include "mnewtrackbar.h"
 #include "mpicker.h"
 #include "mcombopicker.h"
@@ -106,6 +112,7 @@
 
 #include "miconflow.h"
 #include "mcontainerctrl.h"
+#include "mdialpad.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -8,12 +8,18 @@ AM_CPPFLAGS = -I$(TOP_DIR) -I$(TOP_DIR)/include -I.
 
 COMMON_LADD = ../src/libmgncs4touch.la
 
-noinst_PROGRAMS = switchbutton picker newtrackbar commdraw datepicker \
+noinst_PROGRAMS = switchbutton toggle picker newtrackbar commdraw datepicker \
     timepicker exlist btnnavbar imgnavbar name2value itembar balloontip \
-    hscrollview iconflow tableview settingtableview
+    hscrollview iconflow tableview settingtableview dialpad textview
 
 switchbutton_SOURCES = switchbutton.c
 switchbutton_LDADD = $(COMMON_LADD) @APP_LIBS@
+
+toggle_SOURCES = toggle.c
+toggle_LDADD = $(COMMON_LADD) @APP_LIBS@
+
+textview_SOURCES = textview.c
+textview_LDADD = $(COMMON_LADD) @APP_LIBS@
 
 picker_SOURCES = picker.c
 picker_LDADD = $(COMMON_LADD) @APP_LIBS@
@@ -53,6 +59,9 @@ hscrollview_LDADD = ${COMMON_LADD} @APP_LIBS@
 
 iconflow_SOURCES = iconflow.c
 iconflow_LDADD = ${COMMON_LADD} @APP_LIBS@
+
+dialpad_SOURCES = dialpad.c
+dialpad_LDADD = ${COMMON_LADD} @APP_LIBS@
 
 tableview_SOURCES = tableview.c msimpletableviewpiece.h
 tableview_LDADD = ${COMMON_LADD} @APP_LIBS@

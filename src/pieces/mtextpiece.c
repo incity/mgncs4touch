@@ -205,6 +205,7 @@ static DWORD mTextPiece_getProperty(mTextPiece* self, int id)
     }
 }
 
+/*
 static BOOL mTextPiece_autoSize (mTextPiece* self, mWidget *owner, const SIZE *pszMin, const SIZE *pszMax)
 {
     SIZE size;
@@ -249,12 +250,13 @@ static BOOL mTextPiece_autoSize (mTextPiece* self, mWidget *owner, const SIZE *p
 
     return TRUE;
 }
+*/
 
 BEGIN_MINI_CLASS(mTextPiece, mLabelPiece)
-    CLASS_METHOD_MAP(mTextPiece, construct    )
-    CLASS_METHOD_MAP(mTextPiece, paint        )
-    CLASS_METHOD_MAP(mTextPiece, setProperty  )
-    CLASS_METHOD_MAP(mTextPiece, getProperty  )
-    CLASS_METHOD_MAP(mTextPiece, autoSize     )
+	CLASS_METHOD_MAP(mTextPiece, construct    )
+	CLASS_METHOD_MAP(mTextPiece, paint        )
+	CLASS_METHOD_MAP(mTextPiece, setProperty  )
+	CLASS_METHOD_MAP(mTextPiece, getProperty  )
+	//CLASS_METHOD_MAP(mTextPiece, autoSize     )
 END_MINI_CLASS
 

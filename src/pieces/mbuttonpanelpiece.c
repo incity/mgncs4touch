@@ -147,17 +147,26 @@ static BOOL mButtonPanelPiece_setRect(mButtonPanelPiece *self, const RECT *prc)
 static void mButtonPanelPiece_setStateTable(mButtonPanelPiece *self,
         mHotPiece *piece, int propertyId, DWORD normalValue, DWORD pushedValue)
 {
-    mStateTable *ms;
+    mStateTable *ms = NULL;
 
     if (!ncsIsValidObj((mObject*)piece)) {
         puts("invalid object");
         assert(0);
     }
 
-    ms = (mStateTable*)calloc(1, sizeof(mStateTable));
-    assert(ms);
+    list_t *i = NULL;
+    list_for_each(i, &self->stateTable) {
+        mStateTable *tmp = (mStateTable*)i;
+        if(tmp->propertyId == propertyId)
+            ms = tmp;
+    }
 
-    list_add(&ms->list, &self->stateTable);
+    if(ms == NULL) {
+        ms = (mStateTable*)calloc(1, sizeof(mStateTable));
+        assert(ms);
+        list_add(&ms->list, &self->stateTable);
+    }
+    
     ms->piece = piece;
     ms->propertyId = propertyId;
     ms->propertyValue[NCS_BPP_NORMAL] = normalValue;
@@ -230,6 +239,7 @@ static void mButtonPanelPiece_setGradientBackgroundColor(mButtonPanelPiece *self
     if (pushedTableSize > 0)
         resetColorTable(self, &colorTable[NCS_BPP_PUSHED], pushedValues, pushedValuePositions, pushedTableSize);
 }
+    
 
 static void mButtonPanelPiece_clearGradientBackgroundColor(mButtonPanelPiece *self, BOOL clearNormalState, BOOL clearPushedState)
 {

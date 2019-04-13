@@ -5,12 +5,13 @@ AM_CPPFLAGS = -I../include
 lib_LTLIBRARIES = libmgncs4touch@NCS4TOUCH_LIBSUFFIX@.la
 
 COMMON_SRCS = mgncs4touch.c mtouchcomm.c lf_touch.c mtouchrdr.c touch_pieces.c \
-    touch_widget_rdr.c manimation.c mswitchbutton.c mpicker.c  \
+    touch_widget_rdr.c manimation.c mswitchbutton.c mtoggle.c mpicker.c  \
     mnewtrackbar.c mcombopicker.c mtimepicker.c mdatepicker.c \
     mexlist.c mbtnnavbar.c mimgnavbar.c mitembar.c balloon_tip_maker.c \
-    mpieceitem.c mitemiterator.c \
+    mpieceitem.c mpiecegriditem.c mitemiterator.c \
     mcenterhbox.c mfillboxex.c mlayout_manager.c mlinevbox.c \
-    miconflow.c mcontainerctrl.c
+    mflowlayout.c mgridlayout.c mtextview.c \
+    miconflow.c mcontainerctrl.c mdialpad.c mpasswordbox.c
 
 SUBLIBS = pieces/libpieces.la \
     physics-animation/libphysics-animation.la 

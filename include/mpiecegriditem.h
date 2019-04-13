@@ -37,38 +37,58 @@
  \endverbatim
 */
 
-#ifndef _MGNCS_LAYOUTMANAGER_H
-#define _MGNCS_LAYOUTMANAGER_H
+#ifndef  MPIECEGRIDITEM_INC
+#define  MPIECEGRIDITEM_INC
 
 #ifdef __cplusplus
 extern "C" {
-#endif /* __cplusplus */
+#endif
 
-typedef struct _mLayoutManager mLayoutManager;
-typedef struct _mLayoutManagerClass mLayoutManagerClass;
+typedef struct _mPieceGridItemClass mPieceGridItemClass;
+typedef struct _mPieceGridItem mPieceGridItem;
 
-#define mLayoutManagerHeader(clss) \
-    mObjectHeader(clss)
-
-struct _mLayoutManager
-{
-    mLayoutManagerHeader(mLayoutManager)
+enum LayoutGravity{
+    LAYOUT_GRAVITY_Fill,
 };
 
-#define mLayoutManagerClassHeader(clss, superCls) \
-    mObjectClassHeader(clss, superCls) \
-    mPieceItem* (*newPieceItem)(clss*); \
-    void (*reLayout)(clss*, mItemIterator*, int, int);
 
-struct _mLayoutManagerClass
-{
-    mLayoutManagerClassHeader(mLayoutManager, mObject)
+#define mPieceGridItemHeader(clss) \
+    mPieceItemHeader(clss) \
+    int row, colum; \
+    int rowSpan, columSpan; \
+    enum LayoutGravity gravity; \
+
+
+#define mPieceGridItemClassHeader(clss, superCls) \
+    mPieceItemClassHeader(clss, superCls)  \
+    void (*setGravity)(clss*, enum LayoutGravity);    \
+    void (*setRow)(clss*, int);    \
+    void (*setColum)(clss*, int);    \
+    void (*setRowSpan)(clss*, int);    \
+    void (*setColumSpan)(clss*, int);    \
+    int  (*getGravity)(clss*);    \
+    int  (*getRow)(clss*);    \
+    int  (*getColum)(clss*);    \
+    int  (*getRowSpan)(clss*);    \
+    int  (*getColumSpan)(clss*);    \
+
+
+
+struct _mPieceGridItem
+{   
+    mPieceGridItemHeader(mPieceGridItem)
 };
 
-MGNCS_EXPORT extern mLayoutManagerClass g_stmLayoutManagerCls;
+struct _mPieceGridItemClass
+{   
+    mPieceGridItemClassHeader(mPieceGridItem, mPieceItem)
+};
+
+MGNCS_EXPORT extern mPieceGridItemClass g_stmPieceGridItemCls;
 
 #ifdef __cplusplus
 }
-#endif /* __cplusplus */
+#endif
 
-#endif /* _MGNCS_LAYOUTMANAGER_H */
+#endif   /* ----- #ifndef MPIECEGRIDITEM_INC  ----- */
+

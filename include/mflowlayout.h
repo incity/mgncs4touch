@@ -37,38 +37,63 @@
  \endverbatim
 */
 
-#ifndef _MGNCS_LAYOUTMANAGER_H
-#define _MGNCS_LAYOUTMANAGER_H
+#ifndef _MGNCS_MFLOWLAYOUT_H
+#define _MGNCS_MFLOWLAYOUT_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
-typedef struct _mLayoutManager mLayoutManager;
-typedef struct _mLayoutManagerClass mLayoutManagerClass;
+typedef struct _mFlowLayout mFlowLayout;
+typedef struct _mFlowLayoutClass mFlowLayoutClass;
+enum FlowLayoutHAlign{
+    FLOW_LAYOUT_HALIGN_LEFT,
+    FLOW_LAYOUT_HALIGN_CENTER,
+    FLOW_LAYOUT_HALIGN_RIGHT,
+};
+    
+enum FlowLayoutVAlign{
+    FLOW_LAYOUT_VALIGN_TOP,
+    FLOW_LAYOUT_VALIGN_CENTER,
+    FLOW_LAYOUT_VALIGN_BOTTOM,
+};
+    
 
-#define mLayoutManagerHeader(clss) \
-    mObjectHeader(clss)
+#define mFlowLayoutHeader(clss) \
+    mLayoutManagerHeader(clss) \
+    int hgap:14; \
+    int vgap:14; \
+    unsigned int halign:2; \
+    unsigned int valign:2;
 
-struct _mLayoutManager
+struct _mFlowLayout
 {
-    mLayoutManagerHeader(mLayoutManager)
+    mFlowLayoutHeader(mFlowLayout)
 };
 
-#define mLayoutManagerClassHeader(clss, superCls) \
-    mObjectClassHeader(clss, superCls) \
-    mPieceItem* (*newPieceItem)(clss*); \
-    void (*reLayout)(clss*, mItemIterator*, int, int);
+#define mFlowLayoutClassHeader(clss, superCls) \
+    mLayoutManagerClassHeader(clss, superCls) \
+    void (*setHgap)(clss*, int); \
+    void (*setVgap)(clss*, int); \
+    void (*setHAlignment)(clss*, enum FlowLayoutHAlign); \
+    void (*setVAlignment)(clss*, enum FlowLayoutVAlign); \
+    int (*getHgap)(clss*); \
+    int (*getVgap)(clss*); \
+    enum FlowLayoutHAlign (*getHAlignment)(clss*); \
+    enum FlowLayoutVAlign (*getVAlignment)(clss*);
 
-struct _mLayoutManagerClass
+
+
+
+struct _mFlowLayoutClass
 {
-    mLayoutManagerClassHeader(mLayoutManager, mObject)
+    mFlowLayoutClassHeader(mFlowLayout, mLayoutManager)
 };
 
-MGNCS_EXPORT extern mLayoutManagerClass g_stmLayoutManagerCls;
+MGNCS_EXPORT extern mFlowLayoutClass g_stmFlowLayoutCls;
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
-#endif /* _MGNCS_LAYOUTMANAGER_H */
+#endif /* _MGNCS_MFLOWLAYOUT_H */

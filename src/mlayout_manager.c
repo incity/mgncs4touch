@@ -49,6 +49,13 @@ static void mLayoutManager_reLayout(mLayoutManager *self, mItemIterator* iter, i
     return;
 }
 
+static mPieceItem*  mLayoutManager_newPieceItem(mLayoutManager *self)
+{
+    return NEW(mPieceItem);
+}
+
+
 BEGIN_MINI_CLASS(mLayoutManager, mObject)
     CLASS_METHOD_MAP(mLayoutManager, reLayout)
+    CLASS_METHOD_MAP(mLayoutManager, newPieceItem)
 END_MINI_CLASS

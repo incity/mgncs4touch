@@ -400,9 +400,13 @@ static mPieceItem *mPanelPiece_createItemNode(mPanelPiece *self, mHotPiece *piec
 {
     mPieceItem *item = NULL;
 
-    if ((item = NEW(mPieceItem)) == NULL)
-        assert(0);
+    if(self->layout == NULL)
+        item = NEW(mPieceItem);
+    else
+        item = _c(self->layout)->newPieceItem(self->layout);
 
+    assert(item);
+    
     if (INSTANCEOF(piece, mPanelPiece)) {
         ((mPanelPiece*)piece)->isTopPanel = FALSE;
     }
@@ -518,6 +522,7 @@ static void mPanelPiece_setLayoutManager(mPanelPiece *self, mLayoutManager *layo
     }
 
     if (layout) {
+        ADDREF(layout);
         self->layout = layout;
         _c(self)->reLayout(self);
     }
@@ -1357,10 +1362,64 @@ static void mPanelPiece_invalidatePiece(mPanelPiece *self, mHotPiece *piece, con
         owner = (mWidget*) ((mPanelPiece*)self)->owner;
         if ( NULL != owner ) {
             OffsetRect(&dirtyRect, parentRC.left, parentRC.top);
-            InvalidateRect(owner->hwnd, &dirtyRect, FALSE);
+            InvalidateRect(owner->hwnd, &dirtyRect, TRUE);
             ((mPanelPiece*)self)->update_flag = TRUE;
         }
     }
+}
+
+
+static BOOL mPanelPiece_autoSize (mPanelPiece* self, mWidget *owner, const SIZE *pszMin, const SIZE *pszMax)
+{
+    SIZE size;
+
+    RECT rc;
+    GetClientRect(owner->hwnd, &rc);
+    //_c(self)->getRect(self, &rc);
+    size.cx = RECTW(rc);
+    size.cy = RECTH(rc);
+
+    mItemIterator *iter = _c(self->itemManager)->createItemIterator(self->itemManager);
+    mPieceItem *item;
+    while ((item = _c(iter)->next(iter))) {
+        RECT irc;
+        _c(item->piece)->getRect(item->piece, &irc);
+
+        int w = item->x + RECTW(irc);
+        if(w > size.cx)
+            size.cx = w;
+
+        int h = item->y + RECTH(irc);
+        if(h > size.cy)
+            size.cy = h;
+
+    }
+    DELETE(iter);
+
+    if (pszMin) {   
+        if (size.cx < pszMin->cx) {
+            size.cx = pszMin->cx;
+        }
+
+        if (size.cy < pszMin->cy) {
+            size.cy = pszMin->cy;
+        }
+    }
+
+    if (pszMax) {   
+        if (size.cx > pszMax->cx) {
+            size.cx = pszMax->cx;
+        }
+
+        if (size.cy > pszMax->cy) {
+            size.cy = pszMax->cy;
+        }
+    }
+
+    self->right  = self->left + size.cx;
+    self->bottom = self->top + size.cy;
+
+    return TRUE;
 }
 
 BEGIN_MINI_CLASS(mPanelPiece, mStaticPiece)
@@ -1404,6 +1463,7 @@ BEGIN_MINI_CLASS(mPanelPiece, mStaticPiece)
     CLASS_METHOD_MAP(mPanelPiece, enableChildCache)
     CLASS_METHOD_MAP(mPanelPiece, updateChildCache)
     CLASS_METHOD_MAP(mPanelPiece, invalidatePiece)
+	CLASS_METHOD_MAP(mPanelPiece, autoSize)
 END_MINI_CLASS
 
 

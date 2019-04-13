@@ -37,38 +37,49 @@
  \endverbatim
 */
 
-#ifndef _MGNCS_LAYOUTMANAGER_H
-#define _MGNCS_LAYOUTMANAGER_H
+#ifndef _MGNCS_MGRIDLAYOUT_H
+#define _MGNCS_MGRIDLAYOUT_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
-typedef struct _mLayoutManager mLayoutManager;
-typedef struct _mLayoutManagerClass mLayoutManagerClass;
+typedef struct _mGridLayout mGridLayout;
+typedef struct _mGridLayoutClass mGridLayoutClass;
+    
 
-#define mLayoutManagerHeader(clss) \
-    mObjectHeader(clss)
+#define mGridLayoutHeader(clss) \
+    mLayoutManagerHeader(clss) \
+    int rows, colums; \
+    int align, hgap, vgap;
 
-struct _mLayoutManager
+struct _mGridLayout
 {
-    mLayoutManagerHeader(mLayoutManager)
+    mGridLayoutHeader(mGridLayout)
 };
 
-#define mLayoutManagerClassHeader(clss, superCls) \
-    mObjectClassHeader(clss, superCls) \
-    mPieceItem* (*newPieceItem)(clss*); \
-    void (*reLayout)(clss*, mItemIterator*, int, int);
+#define mGridLayoutClassHeader(clss, superCls) \
+    mLayoutManagerClassHeader(clss, superCls) \
+    void (*setHgap)(clss*, int hgap); \
+    void (*setVgap)(clss*, int vgap); \
+    void (*setRows)(clss*, int rows); \
+    void (*setColums)(clss*, int cols); \
+    int (*getHgap)(clss*); \
+    int (*getVgap)(clss*); \
+    int (*getRows)(clss*); \
+    int (*getColums)(clss*);
 
-struct _mLayoutManagerClass
+
+
+struct _mGridLayoutClass
 {
-    mLayoutManagerClassHeader(mLayoutManager, mObject)
+    mGridLayoutClassHeader(mGridLayout, mLayoutManager)
 };
 
-MGNCS_EXPORT extern mLayoutManagerClass g_stmLayoutManagerCls;
+MGNCS_EXPORT extern mGridLayoutClass g_stmGridLayoutCls;
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
-#endif /* _MGNCS_LAYOUTMANAGER_H */
+#endif /* _MGNCS_MGRIDLAYOUT_H */

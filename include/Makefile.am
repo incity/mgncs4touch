@@ -19,11 +19,12 @@ libmgncs4touchincludedir = $(includedir)/mgncs4touch
 
 libmgncs4touchinclude_HEADERS = ../mgncs4touchconfig.h \
     mtouchdebug.h mgncs4touch.h mtouchcomm.h \
-    mtouchrdr.h manimation.h mswitchbutton.h mnewtrackbar.h \
+    mtouchrdr.h manimation.h mswitchbutton.h mtoggle.h mnewtrackbar.h \
     mpicker.h mcombopicker.h mtimepicker.h mdatepicker.h \
     mbtnnavbar.h mimgnavbar.h mexlist.h mitembar.h balloon_tip_maker.h \
     mpieceitem.h mitemiterator.h mcenterhbox.h mlayout_manager.h mlinevbox.h \
-    mcontainerctrl.h miconflow.h mfillboxex.h
+    mflowlayout.h mgridlayout.h mpiecegriditem.h mtextview.h \
+    mcontainerctrl.h miconflow.h mfillboxex.h mdialpad.h mpasswordbox.h
 
 EXTRA_DIST =
 
