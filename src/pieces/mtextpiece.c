@@ -1,30 +1,30 @@
 /*
  *   This file is part of mGNCS4Touch, a component for MiniGUI.
- * 
+ *
  *   Copyright (C) 2008~2018, Beijing FMSoft Technologies Co., Ltd.
- * 
+ *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation, either version 3 of the License, or
  *   (at your option) any later version.
- * 
+ *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU General Public License for more details.
- * 
+ *
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  *   Or,
- * 
+ *
  *   As this program is a library, any link to this program must follow
  *   GNU General Public License version 3 (GPLv3). If you cannot accept
  *   GPLv3, you need to be licensed from FMSoft.
- * 
+ *
  *   If you have got a commercial license of this program, please use it
  *   under the terms and conditions of the commercial license.
- * 
+ *
  *   For more information about the commercial license, please refer to
  *   <http://www.minigui.com/en/about/licensing-policy/>.
  */
@@ -43,9 +43,9 @@
 
 static void mTextPiece_construct(mTextPiece *self, DWORD add_data)
 {
-	Class(mLabelPiece).construct ((mLabelPiece*)self, add_data);
+    Class(mLabelPiece).construct ((mLabelPiece*)self, add_data);
 
-	self->font          = NULL;
+    self->font          = NULL;
 
     self->color         = 0xFFFFFFFF;
     self->shadow_color  = 0xFFFFFFFF;
@@ -122,7 +122,6 @@ static void mTextPiece_paint(mTextPiece *self, HDC hdc, mWidget *owner, DWORD ad
                 );
 
         SetRect(&rc,rcClient.left,rcClient.top+1,rcClient.right,rcClient.bottom+1);
-
         if (self->maxLen > 0) {
             TextOutOmitted (hdc, rc.left, rc.top, str, strlen(str), self->maxLen);
         }
@@ -225,7 +224,7 @@ static BOOL mTextPiece_autoSize (mTextPiece* self, mWidget *owner, const SIZE *p
 
     ReleaseDC (hdc);
 
-    if (pszMin) {   
+    if (pszMin) {
         if (size.cx < pszMin->cx) {
             size.cx = pszMin->cx;
         }
@@ -235,7 +234,7 @@ static BOOL mTextPiece_autoSize (mTextPiece* self, mWidget *owner, const SIZE *p
         }
     }
 
-    if (pszMax) {   
+    if (pszMax) {
         if (size.cx > pszMax->cx) {
             size.cx = pszMax->cx;
         }
@@ -252,10 +251,10 @@ static BOOL mTextPiece_autoSize (mTextPiece* self, mWidget *owner, const SIZE *p
 }
 
 BEGIN_MINI_CLASS(mTextPiece, mLabelPiece)
-	CLASS_METHOD_MAP(mTextPiece, construct    )
-	CLASS_METHOD_MAP(mTextPiece, paint        )
-	CLASS_METHOD_MAP(mTextPiece, setProperty  )
-	CLASS_METHOD_MAP(mTextPiece, getProperty  )
-	CLASS_METHOD_MAP(mTextPiece, autoSize     )
+    CLASS_METHOD_MAP(mTextPiece, construct    )
+    CLASS_METHOD_MAP(mTextPiece, paint        )
+    CLASS_METHOD_MAP(mTextPiece, setProperty  )
+    CLASS_METHOD_MAP(mTextPiece, getProperty  )
+    CLASS_METHOD_MAP(mTextPiece, autoSize     )
 END_MINI_CLASS
 
