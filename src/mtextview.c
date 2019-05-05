@@ -26,7 +26,12 @@ static mObject* mTextView_createBody(mTextView *self)
         body = (mPanelPiece*)NEWPIECE(mScrollViewPiece);
     else
         body = (mPanelPiece*)NEWPIECE(mHScrollViewPiece);
-    
+
+    mTextPiece *textpiece = (mTextPiece*)NEWPIECE(mTextPiece);
+    //_c(textpiece)->setProperty(textpiece, NCSP_LABELPIECE_AUTOWRAP, 1);
+    _c(textpiece)->setProperty(textpiece, NCSP_TEXTPIECE_TEXTCOLOR,
+                                (DWORD)MakeRGBA(0x00, 0x00, 0x00, 0xff));
+    self->textpiece = textpiece;
     return (mObject*)body;
 }
 
@@ -62,19 +67,19 @@ static BOOL mTextView_onCreate(mTextView* self, DWORD addData)
     mPanelPiece *content = (mPanelPiece*)NEWPIECE(mPanelPiece);
     _c(body)->addContent(body, (mHotPiece*)content, 0, 0);
 
-    mTextPiece *textpiece = (mTextPiece*)NEWPIECE(mTextPiece);
+    mTextPiece *textpiece = self->textpiece;
     _c(textpiece)->setProperty(textpiece, NCSP_LABELPIECE_LABEL,
                                 (DWORD)GetWindowCaption(self->hwnd));
-    _c(textpiece)->setProperty(textpiece, NCSP_LABELPIECE_AUTOWRAP, 1);
-    _c(textpiece)->setProperty(textpiece, NCSP_TEXTPIECE_TEXTCOLOR,
-                                (DWORD)MakeRGBA(0x00, 0x00, 0x00, 0xff));
 
     _SUPER(mWidget, self, onCreate, addData);
 
-    SIZE max;
+    SIZE min, max;
+    min.cx = RECTW(rc);
+    min.cy = RECTH(rc);
+
     _c(self)->getMaxSize(self, &max);
-    _c(textpiece)->autoSize(textpiece, (mObject *)self, NULL, &max);
-    self->textpiece = textpiece;
+    _c(textpiece)->autoSize(textpiece, (mObject *)self, &min, &max);
+    
     _c(content)->addContent(content, (mHotPiece*)textpiece, 0, 0);
     _c(content)->autoSize(content, (mObject *)self, NULL, NULL);
 
@@ -109,6 +114,21 @@ static BOOL mTextView_setProperty(mTextView *self, int id, DWORD value)
                 break;
         }
     }
+
+    mTextPiece *textpiece = self->textpiece;
+    if(textpiece) {
+        switch (id) {
+            case NCSP_TEXTVIEW_ALIGN:
+                return _c(textpiece)->setProperty(textpiece, NCSP_LABELPIECE_ALIGN, value);
+            case NCSP_TEXTVIEW_VALIGN:
+                return _c(textpiece)->setProperty(textpiece, NCSP_LABELPIECE_VALIGN, value);
+            case NCSP_TEXTVIEW_AUTOWRAP:
+                return _c(textpiece)->setProperty(textpiece, NCSP_LABELPIECE_AUTOWRAP, value);
+            default:
+                break;
+        }
+    }
+    
     return Class(mWidget).setProperty((mWidget*)self, id, value);
 }
 
@@ -150,9 +170,14 @@ static LRESULT mTextView_wndProc(mTextView* self, UINT message, WPARAM wParam, L
             RECT oldrc, newrc;
             _c(self->textpiece)->getRect(self->textpiece, &oldrc);
 
-            SIZE max;
+            RECT rc;
+            GetClientRect(self->hwnd, &rc);
+
+            SIZE min, max;
             _c(self)->getMaxSize(self, &max);
-            _c(self->textpiece)->autoSize(self->textpiece, (mObject *)self, NULL, &max);
+            min.cx = RECTW(rc);
+            min.cy = RECTH(rc);
+            _c(self->textpiece)->autoSize(self->textpiece, (mObject *)self, &min, &max);
 
             mPanelPiece *parent = (mPanelPiece *)self->textpiece->parent;
             assert(parent);
@@ -162,9 +187,9 @@ static LRESULT mTextView_wndProc(mTextView* self, UINT message, WPARAM wParam, L
 
             RECT bounds;
             GetBoundRect(&bounds, &oldrc, &newrc);
-            print_rect("oldrc:", oldrc);
-            print_rect("newrc:", newrc);
-            print_rect("bounds:", bounds);
+            //print_rect("oldrc:", oldrc);
+            //print_rect("newrc:", newrc);
+            //print_rect("bounds:", bounds);
             mShapeTransRoundPiece* backPiece = _c(parent)->getBkgndPiece(parent);
             _c(backPiece)->setRect (backPiece, &bounds);
 
