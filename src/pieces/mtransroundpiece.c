@@ -189,7 +189,7 @@ static void setPath (mShapeTransRoundPiece *self,
     x = tx, y = ty, w = tw, h = th;
     sharp_width -= x;
 
-    _ERR_PRINTF("VincentWei(%s): called.", __FUNCTION__);
+    //_ERR_PRINTF("VincentWei(%s): called.", __FUNCTION__);
 
     MGPlusPathReset(path);
     if (radius) {

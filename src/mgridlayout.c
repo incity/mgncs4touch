@@ -102,7 +102,6 @@ static void mGridLayout_reLayout(mGridLayout *self, mItemIterator* iter, int w, 
     SetRect(&rc, 0, 0, 0, 0);
     w1 = (w - (self->colums - 1) * self->hgap) / self->colums;
     h1 = (h - (self->rows - 1) * self->vgap) / self->rows;
-    //printf("%s %d: w1:%d h1:%d\n", __func__, __LINE__, w1, h1);
     while ((item = (mPieceGridItem *)_c(iter)->next(iter))) {
         if (item->underLayout) {
             rc.right = w1 * item->columSpan + self->hgap * (item->columSpan - 1);
