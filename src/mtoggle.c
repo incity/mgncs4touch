@@ -304,7 +304,7 @@ static void mToggle_mGEffPropCallback(MGEFF_ANIMATION handle, mToggle* self, int
     self->mouseX = *value;
     
     /* update */
-    InvalidateRect (self->hwnd, NULL, FALSE);
+    InvalidateRect (self->hwnd, NULL, TRUE);
 }
 
 static void mToggle_runAnimation(mToggle* self, int start, int end, int duration)
