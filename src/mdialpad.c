@@ -219,8 +219,8 @@ static mObject* mDialPad_createBody(mDialPad *self)
     mGridLayout *layout = (mGridLayout*)NEW(mGridLayout);
     _c(layout)->setRows(layout, 3);
     _c(layout)->setColums(layout, 4);
-    _c(layout)->setVgap(layout, 10);
-    _c(layout)->setHgap(layout, 10);
+    _c(layout)->setVgap(layout, 20);
+    _c(layout)->setHgap(layout, 20);
     
     _c(body)->setLayoutManager (body, (mLayoutManager*)layout);
     
