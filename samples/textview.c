@@ -51,7 +51,7 @@
 #include <mgeff/mgeff.h>
 
 #include <mgncs4touch/mgncs4touch.h>
-// #define NDEBUG	1
+// #define NDEBUG    1
 #include <mgncs4touch/mtouchdebug.h>
 
 #define ID_TEXTVIEW     101
@@ -69,7 +69,7 @@ static void toggle_notify(mWidget *self, int id, int nc, DWORD add_data)
 
 static NCS_EVENT_HANDLER toggle_handlers [] = {
     NCS_MAP_NOTIFY(NCSN_TOGGLE_STATUSCHANGED, toggle_notify),
-	{0, NULL}	
+    {0, NULL}    
 };
 
 static NCS_PROP_ENTRY toggle_props [] = {
@@ -81,20 +81,20 @@ static NCS_PROP_ENTRY toggle_props [] = {
 //Controls
 static NCS_WND_TEMPLATE _ctrl_templ[] = 
 {
-	{
-		NCSCTRL_TEXTVIEW, 
-		ID_TEXTVIEW,
-		120, 220, 100, 50,
-		WS_VISIBLE,
-		WS_EX_TRANSPARENT,
-		"012345678909876543210\n-=qwertyuiop\n[]asdfghjkl\n;'zxcvbnm\n,./~!@#$%^\n&*()_+",
-		NULL, //props,
-		NULL, //rdr_info
-		NULL, //handlers,
-		NULL, //controls
-		0,
-		0 //add data
-	},
+    {
+        NCSCTRL_TEXTVIEW, 
+        ID_TEXTVIEW,
+        120, 220, 100, 50,
+        WS_VISIBLE,
+        WS_EX_TRANSPARENT,
+        "012345678909876543210\n-=qwertyuiop\n[]asdfghjkl\n;'zxcvbnm\n,./~!@#$%^\n&*()_+",
+        NULL, //props,
+        NULL, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
     {
         NCSCTRL_TEXTVIEW, 
         ID_HTEXTVIEW,
@@ -109,20 +109,20 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         0,
         0 //add data
     },
-	{
-	NCSCTRL_TOGGLE, 
-	ID_TOGGLE,
-	20, 20, 52, 32,
-	WS_VISIBLE,
-	WS_EX_TRANSPARENT,
-	"I\nO",
-	toggle_props, //props,
-	NULL, //rdr_info
-	toggle_handlers, //handlers,
-	NULL, //controls
-	0,
-	0 //add data
-},	
+    {
+    NCSCTRL_TOGGLE, 
+    ID_TOGGLE,
+    20, 20, 52, 32,
+    WS_VISIBLE,
+    WS_EX_TRANSPARENT,
+    "I\nO",
+    toggle_props, //props,
+    NULL, //rdr_info
+    toggle_handlers, //handlers,
+    NULL, //controls
+    0,
+    0 //add data
+},    
 };
 
 
@@ -156,11 +156,11 @@ int MiniGUIMain(int argc, const char* argv[])
 #ifdef _MGRM_PROCESSES
     JoinLayer (NAME_DEF_LAYER, NULL, 0, 0);
 #endif
-	
+    
     ncsInitialize();
     ncs4TouchInitialize();
     mDialogBox* mydlg = (mDialogBox*)ncsCreateMainWindowIndirect 
-    						(&mymain_templ, HWND_DESKTOP);
+                            (&mymain_templ, HWND_DESKTOP);
     mGEffInit();
     _c(mydlg)->doModal(mydlg, TRUE);
     mGEffDeinit();

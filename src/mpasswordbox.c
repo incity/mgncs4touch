@@ -21,7 +21,6 @@
 static BOOL mPasswordBox_onEraseBkgnd(mPasswordBox *self, HDC hdc, const RECT *pinv);
 static void mPasswordBox_onPaint (mPasswordBox *self, HDC hdc, const PCLIPRGN pinv_clip);
 
-
 static void mPasswordBox_construct(mPasswordBox *self, DWORD param)
 {
     Class(mWidget).construct((mWidget*)self, param);
@@ -326,8 +325,11 @@ static void mPasswordBox_onChar (mPasswordBox *self, WPARAM wParam, LPARAM lPara
         return;
     }
     
-    if(result > 0)
+    if(result > 0) {
         ncsNotifyParent((mWidget*)self, NCSN_PASSWORDBOX_CHANGED);
+        if(strlen(self->password) >= self->max_password_length)
+            ncsNotifyParent((mWidget*)self, NCSN_PASSWORDBOX_ENTERED);
+    }
 }
 
 static int mPasswordBox_onKeyDown(mPasswordBox* self, int scancode, DWORD key_flags)

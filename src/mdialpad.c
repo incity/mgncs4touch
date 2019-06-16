@@ -299,6 +299,20 @@ static BOOL mDialPad_setProperty(mDialPad* self, int id, DWORD value)
             return TRUE;
         }
         return FALSE;
+    case NCSP_DIALPAD_KEYPAD_NUMBER_FONTNAME:
+    {
+        PLOGFONT font;
+        font = (PLOGFONT)LoadResource((const char*)value, RES_TYPE_FONT, 0L);
+
+        // TODO: ???
+        if(font && self->keypad_number_font) {
+            ReleaseRes(((FONT_RES *)self->keypad_number_font)->key);
+            self->keypad_number_font = font;
+            return TRUE;
+        }
+
+        return FALSE;
+    }
     case NCSP_DIALPAD_KEYPAD_NUMBER_COLOR:
         if (self->keypad_number_color != (ARGB)value) {
             self->keypad_number_color = (ARGB)value;
@@ -311,6 +325,20 @@ static BOOL mDialPad_setProperty(mDialPad* self, int id, DWORD value)
             return TRUE;
         }
         return FALSE;
+    case NCSP_DIALPAD_KEYPAD_LETTERS_FONTNAME:
+    {
+        PLOGFONT font;
+        font = (PLOGFONT)LoadResource((const char*)value, RES_TYPE_FONT, 0L);
+    
+        // TODO: ???
+        if(font && self->keypad_letters_font) {
+            ReleaseRes(((FONT_RES *)self->keypad_letters_font)->key);
+            self->keypad_letters_font = font;
+            return TRUE;
+        }
+    
+        return FALSE;
+    }
     case NCSP_DIALPAD_KEYPAD_LETTERS_COLOR:
         if (self->keypad_letters_color != (ARGB)value) {
             self->keypad_letters_color = (ARGB)value;
